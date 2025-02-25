@@ -16,6 +16,8 @@ const configurarRutas = (app) =>{
 
 }
 
+
+
 const conectarDB = async () => {
     try {
         await dbConnection();
