@@ -1,5 +1,5 @@
 import User from "../users/user.model.js";
-import Post from "../posts/post.model.js";
+import Post from "../post/post.model.js";
 import Category from "../categories/category.model.js";
 
 export const savePost = async (req, res) => {

@@ -5,9 +5,14 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { dbConnection } from './mongo.js';
-import limiter from '../src/middlewares/validar-cant-peticiones.js';
-import authRoutes from '../src/auth/auth.routes.js';
-import userRoutes from "../src/users/user.routes.js";
+import limiter from '../src/middlewares/validar-cant-peticiones.js'
+import authRoutes from '../src/auth/auth.routes.js'
+import userRoutes from "../src/users/user.routes.js"
+import postRoutes from "../src/post/post.routes.js"
+import commentRoutes from "../src/comment/comment.routes.js"
+import categoryRoutes from "../src/categories/category.routes.js";
+import Category from "../src/categories/category.model.js";
+import Usuario from "../src/users/user.model.js";
 import { hash } from "argon2";
 
 const configurarMiddlewares = (app) => {
@@ -20,8 +25,12 @@ const configurarMiddlewares = (app) => {
 }
 
 const configurarRutas = (app) =>{
-    app.use("/postSystem/v1/auth", authRoutes);
+        app.use("/postSystem/v1/auth", authRoutes);
         app.use("/postSystem/v1/users", userRoutes);
+        app.use("/postSystem/v1/posts", postRoutes);
+        app.use("/postSystem/v1/comments", commentRoutes);
+        app.use("/postSystem/v1/categories", categoryRoutes);
+
 }
 
 const initializeCategories = async () => {
@@ -52,7 +61,7 @@ const crearAdmin = async () => {
                 surname: "Admin",
                 username: "admin",
                 email: "admin@gmail.com",
-                phone: "123456789",
+                phone: "12345",
                 password: passwordEncriptada,
                 role: "ADMIN_ROLE"
             });
@@ -66,7 +75,6 @@ const crearAdmin = async () => {
         console.error("Error al crear el administrador:", error);
     }
 };
-
 
 
 const conectarDB = async () => {
