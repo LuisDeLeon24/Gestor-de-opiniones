@@ -7,7 +7,7 @@ import {validarJWT} from "../middlewares/validar-jwt.js";
 const router = Router();
 
 router.post(
-    "/",
+    "/guardarPost",
     [
         validarJWT,
         check("title", "El título es obligatorio").not().isEmpty(),
@@ -18,10 +18,12 @@ router.post(
     savePost
 )
 
-router.get("/", getPosts)
+router.get(
+    "/mostrarPost",
+     getPosts)
 
 router.get(
-    "/findPost/:id",
+    "/buscarPost/:id",
     [
         validarJWT,
         check("id", "No Es Un ID Valido").isMongoId(),
@@ -31,7 +33,7 @@ router.get(
 )
 
 router.put(
-    "/:id",
+    "/actualizarPost/:id",
     [
         validarJWT,
         check("id", "No Es Un ID Valido").isMongoId(),
@@ -42,7 +44,7 @@ router.put(
 
 
 router.delete(
-    "/:id",
+    "/borrarPost/:id",
     [
         validarJWT,
         check("id", "No Es Un ID Valido").isMongoId(),

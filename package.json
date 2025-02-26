@@ -3,22 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/WParedes2007/Post-System.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/WParedes2007/Post-System/issues"
-  },
-  "homepage": "https://github.com/WParedes2007/Post-System#readme",
   "dependencies": {
     "argon2": "^0.41.1",
     "bcryptjs": "^3.0.1",
@@ -32,7 +22,6 @@
     "mongoose": "^8.10.1",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
-    "nodemon": "^3.1.9",
-    "post-system": "file:"
+    "nodemon": "^3.1.9"
   }
 }

@@ -9,10 +9,10 @@ const router = Router();
 
 
 router.get(
-    "/get", getUsers);
+    "/getUser", getUsers);
 
 router.get(
-    "/findUser/:id",
+    "/buscarUser/:id",
     [
         check("id", "No es un ID Valido").isMongoId(),
         check("id").custom(existeUsuarioById),
@@ -22,7 +22,7 @@ router.get(
 );
 
 router.put(
-        "/update/:id",
+        "/actualizarUser/:id",
         [
             validarJWT,
             check("id", "No es un ID Válido").isMongoId(),

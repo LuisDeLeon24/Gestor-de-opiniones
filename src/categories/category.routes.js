@@ -6,7 +6,7 @@ import { validarRol } from "../middlewares/validar-roles.js";
 const router = Router();
 
 router.post(
-    "/",
+    "/crearCategoria",
     [
     validarJWT,
     validarRol("ADMIN_ROLE")
@@ -14,10 +14,12 @@ router.post(
     createCategory
 );
 
-router.get("/", getCategories);
+router.get(
+    "/mostrarCategoria",
+     getCategories);
 
 router.put(
-    "/:id",
+    "/actualizarCategoria/:id",
     [
         validarJWT,
         validarRol("ADMIN_ROLE")
@@ -26,7 +28,7 @@ router.put(
 );
 
 router.delete(
-    "/:id", 
+    "/eliminarCategoria/:id", 
     [
         validarJWT,
         validarRol("ADMIN_ROLE")

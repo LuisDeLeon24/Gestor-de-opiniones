@@ -7,7 +7,7 @@ import {validarJWT} from "../middlewares/validar-jwt.js";
 const router = Router();
 
 router.post(
-    "/",
+    "/CrearComentario",
     [
         validarJWT,
         check("postId", "El ID del post es obligatorio").isMongoId(),
@@ -17,10 +17,12 @@ router.post(
     saveComment
 )
 
-router.get("/", getComments)
+router.get(
+    "/mostrarComentario",
+     getComments)
 
 router.get(
-    "/findComment/:id",
+    "/buscarComentario/:id",
     [
         validarJWT,
         check("id", "No Es Un ID Valido").isMongoId(),
@@ -30,7 +32,7 @@ router.get(
 )
 
 router.put(
-    "/:id",
+    "/actualizarComentario/:id",
     [
         validarJWT,
         check("id", "No Es Un ID Valido").isMongoId(),
@@ -41,7 +43,7 @@ router.put(
 
 
 router.delete(
-    "/:id",
+    "/borrarComentario/:id",
     [
         validarJWT,
         check("id", "No Es Un ID Valido").isMongoId(),

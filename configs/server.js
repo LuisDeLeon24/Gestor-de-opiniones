@@ -25,11 +25,11 @@ const configurarMiddlewares = (app) => {
 }
 
 const configurarRutas = (app) =>{
-        app.use("/postSystem/v1/auth", authRoutes);
-        app.use("/postSystem/v1/users", userRoutes);
-        app.use("/postSystem/v1/posts", postRoutes);
-        app.use("/postSystem/v1/comments", commentRoutes);
-        app.use("/postSystem/v1/categories", categoryRoutes);
+        app.use("/gestorOpiniones/auth", authRoutes);
+        app.use("/gestorOpiniones/users", userRoutes);
+        app.use("/gestorOpiniones/posts", postRoutes);
+        app.use("/gestorOpiniones/comments", commentRoutes);
+        app.use("/gestorOpiniones/categories", categoryRoutes);
 
 }
 
@@ -54,7 +54,7 @@ const crearAdmin = async () => {
         const adminExistente = await Usuario.findOne({ role: "ADMIN_ROLE" });
 
         if (!adminExistente) {
-            const passwordEncriptada = await hash("Admin123");
+            const passwordEncriptada = await hash("SumoAdmin");
 
             const admin = new Usuario({
                 name: "Admin",
