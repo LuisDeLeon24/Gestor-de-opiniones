@@ -23,7 +23,7 @@ export const getUsers = async (req = request, res = response) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error Al Obtener Usuario",
+            message: "[Console] Error al obtener el usuario: No se pudo obtener el usuario.",
             error
         });
     }
@@ -36,7 +36,7 @@ export const getUserById = async (req, res) => {
         if (!user) {
             return res.status(404).json({
                 success: false,
-                msg: "Usuario Not Found"
+                msg: "[Console] Error: Usuario no encontrado."
             });
         }
 
@@ -47,7 +47,7 @@ export const getUserById = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            msg: "Error Al Obtener Usuario",
+            msg: "[Console] Error al obtener el usuario: No se pudo obtener el usuario.",
             error
         });
     }
@@ -61,7 +61,7 @@ export const updateUser = async (req, res = response) => {
         if (req.usuario.role === "USER_ROLE" && id !== req.usuario._id.toString()) {
             return res.status(403).json({
                 success: false,
-                msg: "No está autorizado para actualizar la información de otro usuario"
+                msg: "[Console] Error: No está autorizado para actualizar la información de otro usuario."
             });
         }
 
@@ -74,20 +74,20 @@ export const updateUser = async (req, res = response) => {
         if (!user) {
             return res.status(404).json({
                 success: false,
-                msg: "Usuario no encontrado"
+                msg: "[Console] Error: Usuario no encontrado."
             });
         }
 
         res.status(200).json({
             success: true,
-            msg: "Usuario Actualizado!",
+            msg: "[Console] Usuario actualizado: La información del usuario se ha actualizado correctamente.",
             user
         });
 
     } catch (error) {
         res.status(500).json({
             success: false,
-            msg: "Error Al Actualizar Usuario",
+            msg: "[Console] Error al actualizar el usuario: No se pudo actualizar la información del usuario.",
             error
         });
     }

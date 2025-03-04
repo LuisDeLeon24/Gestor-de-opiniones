@@ -15,27 +15,27 @@ export const login = async (req, res) => {
 
         if(!user){
             return res.status(400).json({
-                msg: "Credenciales Incorrectas, Correo No Existente En La Data Base"
+                msg: "[Console] Error: Credenciales incorrectas, el correo no existe en la base de datos."
             });
         }
 
         if(!user.estado){
             return res.status(400).json({
-                msg: "El Usuario No Existe En La Base De Datos"
+                msg: "[Console] Error: El usuario no existe en la base de datos."
             }); 
         }
 
         const validPassword = await verify(user.password, password);
         if(!validPassword){
             return res.status(400).json({
-                msg: "La Contraseña Es Incorrecta"
+                msg: "[Console] Error: La contraseña es incorrecta."
             })
         }
 
         const token = await generarJWT(user.id);
         
         res.status(200).json({
-            msg: "Inicio De Sesion Exitoso!",
+            msg: "[Console] Inicio de sesión exitoso: Has accedido correctamente.",
             userDetails: {
                 username: user.username,
                 token: token
@@ -46,7 +46,7 @@ export const login = async (req, res) => {
     } catch (error) {
         console.log(e);
         res.status(500).json({
-            msg: 'Server Error',
+            msg: '[Console] Error en el servidor: Se ha producido un fallo en el servidor.',
             error: e.message
         })
     }
@@ -59,7 +59,7 @@ export const register  = async (req, res) => {
         if (data.role === "ADMIN_ROLE") {
             return res.status(403).json({
                 success: false,
-                message: "No tienes permisos para registrarte como administrador"
+                message: "[Console] Acceso denegado: No tienes permisos para registrarte como administrador."
             });
         }
 
@@ -76,7 +76,7 @@ export const register  = async (req, res) => {
         })
 
         return res.status(201).json({
-            message: "User Register Successfully",
+            message: "[Console] Registro exitoso: Usuario creado correctamente.",
             userDetails:{
                 user: user.email
             }
@@ -86,7 +86,7 @@ export const register  = async (req, res) => {
         console.log(error);
 
         return res.status(500).json({
-            message: "User Registration Failed",
+            message: "[Console] Error en el registro: No se pudo registrar al usuario.",
             error: error.message
         })
     }

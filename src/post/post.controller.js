@@ -10,7 +10,7 @@ export const savePost = async (req, res) => {
         if (!user) {
             return res.status(400).json({
                 success: false,
-                message: "Usuario No Encontrado"
+                message: "[Console] Error: Usuario no encontrado."
             });
         }
 
@@ -18,7 +18,7 @@ export const savePost = async (req, res) => {
         if (!categoryExists) {
             return res.status(400).json({
                 success: false,
-                message: "Categoría no válida"
+                message: "[Console] Error: Categoría no válida."
             });
         }
 
@@ -34,14 +34,14 @@ export const savePost = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            message: "Publicación Creada",
+            message: "[Console] Publicación creada: La publicación se ha creado correctamente.",
             post
         });
     } catch (error) {
         console.error(error);
         res.status(500).json({
             success: false,
-            message: "Error al guardar la Publicación",
+            message: "[Console] Error al guardar la publicación: No se pudo guardar la publicación.",
             error
         });
     }
@@ -69,7 +69,7 @@ export const getPosts = async(req, res) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error al obtener las publicaciones",
+            message: "[Console] Error al obtener las publicaciones: No se pudieron recuperar las publicaciones.",
             error
         });
     }
@@ -86,7 +86,7 @@ export const searchPost = async (req, res) => {
         if (!post) {
             return res.status(404).json({
                 success: false,
-                message: "Publicación No Encontrada"
+                message: "[Console] Error: Publicación no encontrada."
             });
         }
 
@@ -97,7 +97,7 @@ export const searchPost = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error al buscar la publicación",
+            message: "[Console] Error al buscar la publicación: No se pudo realizar la búsqueda.",
             error
         });
     }
@@ -112,14 +112,14 @@ export const deletePost = async(req, res) => {
         if (!post) {
             return res.status(404).json({
                 success: false,
-                msg: "Publicación No Encontrada"
+                msg: "[Console] Error: Publicación no encontrada."
             });
         }
 
         if (req.usuario.role === "USER_ROLE" && post.keeper.toString() !== req.usuario._id.toString()) {
             return res.status(403).json({ 
                 success: false, 
-                msg: "No autorizado para eliminar esta publicación" 
+                msg: "[Console] Error: No autorizado para eliminar esta publicación." 
             });
         }
 
@@ -128,13 +128,13 @@ export const deletePost = async(req, res) => {
 
         res.status(200).json({
             success: true,
-            message: "Publicación Eliminada Exitosamente"
+            message: "[Console] Publicación eliminada exitosamente."
         });
     } catch (error) {
         console.error(error);
         res.status(500).json({
             success: false,
-            message: "Error al eliminar la publicación",
+            message: "[Console] Error al eliminar la publicación: No se pudo eliminar la publicación.",
             error
         });
     }
@@ -148,7 +148,7 @@ export const updatePost = async (req, res) => {
         if (!req.usuario) {
             return res.status(401).json({
                 success: false,
-                message: "Usuario no autenticado"
+                message: "[Console] Error: Usuario no autenticado."
             });
         }
 
@@ -157,14 +157,14 @@ export const updatePost = async (req, res) => {
         if (!post) {
             return res.status(404).json({
                 success: false,
-                message: "Publicación No Encontrada"
+                message: "[Console] Error: Publicación no encontrada."
             });
         }
 
         if (req.usuario.role === "USER_ROLE" && post.keeper._id.toString() !== req.usuario._id.toString()) {
             return res.status(403).json({ 
                 success: false, 
-                msg: "No autorizado para modificar esta publicación" 
+                msg: "[Console] Error: No autorizado para modificar esta publicación." 
             });
         }
 
@@ -173,7 +173,7 @@ export const updatePost = async (req, res) => {
             if (!categoryExists) {
                 return res.status(400).json({
                     success: false,
-                    message: "Categoría no válida"
+                    message: "[Console] Error: Categoría no válida."
                 });
             }
             post.category = category;
@@ -184,7 +184,7 @@ export const updatePost = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            msg: "Publicación Actualizada!",
+            msg: "[Console] Publicación actualizada: La publicación se ha actualizado correctamente.",
             post
         });
 
@@ -192,7 +192,7 @@ export const updatePost = async (req, res) => {
         console.error(error);
         res.status(500).json({
             success: false,
-            msg: "Error al actualizar la publicación",
+            msg: "[Console] Error al actualizar la publicación: No se pudo actualizar la publicación.",
             error
         });
     }

@@ -38,12 +38,12 @@ const initializeCategories = async () => {
         const defaultCategory = await Category.findOne({ name: "General" });
         if (!defaultCategory) {
             await Category.create({ name: "General" });
-            console.log("Categoría por defecto creada: General");
+            console.log("[Console] Categoría por defecto creada: General");
         } else {
-            console.log("Categoría por defecto ya existente");
+            console.log("[Console] Categoría por defecto ya existente");
         }
     } catch (error) {
-        console.error("Error al inicializar categorías:", error);
+        console.error("[Console] Error al inicializar categorías:", error);
     }
 };
 
@@ -67,12 +67,12 @@ const crearAdmin = async () => {
             });
 
             await admin.save();
-            console.log("Administrador creado exitosamente.");
+            console.log("[Console] Administrador creado exitosamente.");
         } else {
-            console.log("El administrador ya existe.");
+            console.log("[Console] El administrador ya existe.");
         }
     } catch (error) {
-        console.error("Error al crear el administrador:", error);
+        console.error("[Console] Error al crear el administrador:", error);
     }
 };
 

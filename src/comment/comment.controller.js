@@ -11,14 +11,14 @@ export const saveComment = async (req, res) => {
         if (!user) {
             return res.status(400).json({
                 success: false,
-                message: "Usuario No Encontrado"
+                message: "[Console] Error: Usuario no encontrado."
             });
         }
 
         if (!post) {
             return res.status(400).json({
                 success: false,
-                message: "Publicacion No Encontrada"
+                message: "[Console] Error: Publicación no encontrada."
             });
         }
 
@@ -33,14 +33,14 @@ export const saveComment = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            message: "Comentario Creado",
+            message: "[Console] Comentario creado: El comentario se ha creado correctamente.",
             comment
         });
     } catch (error) {
         console.error(error);
         res.status(500).json({
             success: false,
-            message: "Error al guardar el comentario",
+            message: "[Console] Error al guardar el comentario: No se pudo guardar el comentario.",
             error
         });
     }
@@ -59,8 +59,8 @@ export const getComments = async(req, res) => {
             const post = await Post.findById(comment.keeperPost)
             return{
                 ...comment.toObject(),
-                keeperUser: owner ? owner.nombre: "Usuario No Encontrado",
-                keeperPost: post ? post.title: "Publicacion No Encontrada"
+                keeperUser: owner ? owner.nombre: "[Console] Error: Usuario no encontrado.",
+                keeperPost: post ? post.title: "[Console] Error: Publicación no encontrada."
             }
         }));
         
@@ -75,7 +75,7 @@ export const getComments = async(req, res) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error Al Obtener El Comentario",
+            message: "[Console] Error al obtener el comentario: No se pudo recuperar el comentario.",
             error
         })
     }
@@ -90,7 +90,7 @@ export const searchComment = async (req, res) =>{
         if(!comment){
             return res.status(404).json({
                 success: false,
-                message: "Comentario No Encontrado"
+                message: "[Console] Error: Comentario no encontrado."
             })
         }
 
@@ -100,13 +100,13 @@ export const searchComment = async (req, res) =>{
             success: true,
             comment: {
                 ...comment.toObject(),
-                keeperUser: owner ? owner.name : "Creador No Encontrado"
+                keeperUser: owner ? owner.name : "[Console] Error: Creador no encontrado."
             }
         })
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error Al Buscar El Comentario",
+            message: "[Console] Error al buscar el comentario: No se pudo realizar la búsqueda.",
             error
         })
     }
@@ -121,25 +121,25 @@ export const deleteComment = async(req, res) => {
         if (req.usuario.role === "USER_ROLE" && comment.keeperUser.toString() !== req.usuario._id.toString()) {
             return res.status(403).json({ 
                 success: false, 
-                msg: "No autorizado para modificar este comentario" 
+                msg: "[Console] Error: No autorizado para modificar este comentario." 
             });
         }
         
         if (!comment) {
             return res.status(404).json({
                  success: false, 
-                 msg: "Comentario No Encontrado" 
+                 msg: "[Console] Error: Comentario no encontrado." 
             });
         }
 
         res.status(200).json({
             success: true,
-            message: "Comentario Eliminado Exitosamente"
+            message: "[Console] Comentario eliminado exitosamente."
         })
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error Al Eliminar El Comentario",
+            message: "[Console] Error al eliminar el comentario: No se pudo eliminar el comentario.",
             error
         })
     }
@@ -156,20 +156,20 @@ export const updateComment = async (req, res) => {
         if (!comment) {
             return res.status(404).json({
                 success: false,
-                message: "Comentario No Encontrado"
+                message: "[Console] Error: Comentario no encontrado."
             });
         }
 
         if (req.usuario.role === "USER_ROLE" && comment.keeperUser.toString() !== req.usuario._id.toString()) {
             return res.status(403).json({ 
                 success: false, 
-                msg: "No autorizado para modificar este comentario" 
+                msg: "[Console] Error: No autorizado para modificar este comentario." 
             });
         }
 
         res.status(200).json({
             success: true,
-            msg: "Comentario Actualizado!",
+            msg: "[Console] Comentario actualizado correctamente.",
             comment
         });
         
@@ -177,7 +177,7 @@ export const updateComment = async (req, res) => {
         console.error(error);
         res.status(500).json({
             success: false,
-            msg: "Error Al Actualizar El Comentario",
+            msg: "[Console] Error al actualizar el comentario: No se pudo actualizar el comentario.",
             error
         });
     }

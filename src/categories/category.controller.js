@@ -9,13 +9,13 @@ export const createCategory = async (req, res) => {
 
         res.status(201).json({
             success: true,
-            message: "Categoría creada",
+            message: "[Console] Categoría creada: La categoría se ha creado correctamente.",
             category
         });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error al crear la categoría",
+            message: "[Console] Error al crear la categoría: Hubo un problema al intentar crearla.",
             error
         });
     }
@@ -31,7 +31,7 @@ export const getCategories = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error al obtener categorías",
+            message: "[Console] Error al obtener categorías: No se pudieron recuperar las categorías.",
             error
         });
     }
@@ -46,13 +46,13 @@ export const updateCategory = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            message: "Categoría actualizada",
+            message: "[Console] Categoría actualizada: La categoría se ha actualizado correctamente.",
             category
         });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error al actualizar la categoría",
+            message: " [Console] Error al actualizar la categoría: Hubo un problema al intentar actualizarla.",
             error
         });
     }
@@ -66,7 +66,7 @@ export const deleteCategory = async (req, res) => {
         if (!defaultCategory) {
             return res.status(500).json({
                 success: false,
-                message: "No se encontró la categoría por defecto"
+                message: "[Console] Error: No se encontró la categoría por defecto."
             });
         }
 
@@ -76,12 +76,12 @@ export const deleteCategory = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            message: "Categoría eliminada y publicaciones reasignadas"
+            message: "[Console] Categoría eliminada: Las publicaciones han sido reasignadas correctamente."
         });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error al eliminar la categoría",
+            message: "[Console] Error al eliminar la categoría: No se pudo eliminar la categoría.",
             error: error.message 
         });
     }
